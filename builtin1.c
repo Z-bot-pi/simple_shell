@@ -9,7 +9,7 @@
  */
 int desp_history(info_t *info)
 {
-	print_list(info->history);
+	list_print(info->history);
 	return (0);
 }
 
@@ -25,13 +25,13 @@ int alias_unset(info_t *info, char *str)
 	char *p, c;
 	int ret;
 
-	p = _strchr(str, '=');
+	p = _chastr(str, '=');
 	if (!p)
 		return (1);
 	c = *p;
 	*p = 0;
-	ret = delete_node_at_index(&(info->alias),
-		get_node_index(info->alias, node_starts_with(info->alias, str, -1)));
+	ret = at_index_del_node(&(info->alias),
+		fetch_node_index(info->alias, return_node_start(info->alias, str, -1)));
 	*p = c;
 	return (ret);
 }
